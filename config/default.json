@@ -1,0 +1,7 @@
+{
+"jwtPrivateKey": "jwtPrivateKey",
+"jwttokenLife": 300,
+"refreshTokenSecret" : "refreshTokenSecret",
+"refreshTokenLife": 8000
+
+}
