@@ -1,15 +1,15 @@
 const express = require('express');
-const logger = require('./logger');
+const logger = require('./Middleware/logger');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const app = express();
 const router = express.Router();
-const usersModule = require('./Moudles/Users/users'); 
-const home = require('./Moudles/Home/home');
+const usersModule = require('./Routes/Users/users'); 
+const home = require('./Routes/Home/home');
 
 app.use(express.json());
-//app.use(logger);
+app.use(logger);
 //app.use(express.static('public'))
 app.use('/api',home);
 app.use('/api',usersModule);

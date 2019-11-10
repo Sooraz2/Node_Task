@@ -1,7 +1,6 @@
 function Logger(req,res,next) {
 
-    console.log('Logging.....')
-
+    console.log('This is Middlawere Logging.....');
 
         next()
 }
