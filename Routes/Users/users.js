@@ -1,5 +1,6 @@
 const express = require('express');
-
+const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 router = express.Router();
 
 
@@ -14,12 +15,6 @@ const users = [
 
 const loginDetails = {username:'username',password:'password'}
 
-
-
-router.get('/me', async (req,res) => {
-
-    res.send('this is mer');
-})
 
 router.get('/',function(req,res){ 
 
