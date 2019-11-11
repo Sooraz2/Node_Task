@@ -2,6 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 router = express.Router();
+const config = require('config')
 
 
 const users = [
@@ -24,13 +25,15 @@ router.get('/',function(req,res){
 
 router.post('/',function(req,res){
     
+   
     const schema = {
         username : Joi.string().required(),
         password : Joi.string().required()
      }
     
-    const result = Joi.validate(req.query,schema);
+    const result = Joi.validate(req.body,schema);
 
+    
     if(result.error) {
         res.status(404).send(result.error.details[0].message);
         return;
@@ -38,7 +41,7 @@ router.post('/',function(req,res){
 
   let userAuthenicated =(users.find(function(elements){
        
-        return (elements.username == req.query.username  && elements.password== req.query.password)
+        return (elements.username == req.body.username  && elements.password== req.body.password)
    }));
 
 
@@ -55,8 +58,10 @@ router.post('/',function(req,res){
 
 
 router.post('/getAllUsers', function(req,res){
-    tokenValidator(req,res)
+   // tokenValidator(req,res)
+  // console.log(users);
     res.send(users)
+   
 })
 
 
@@ -104,7 +109,5 @@ function tokenValidator(req,res){
     }
 
 }
-
-
 
 module.exports = router;

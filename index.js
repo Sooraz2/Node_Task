@@ -7,7 +7,10 @@ const app = express();
 const router = express.Router();
 const usersModule = require('./Routes/Users/users'); 
 const home = require('./Routes/Home/home');
+const cors = require('cors');
 
+app.use(cors())
+app.disable('etag');
 app.use(express.json());
 app.use(logger);
 //app.use(express.static('public'))
@@ -16,9 +19,10 @@ app.use('/api',usersModule);
 
 
 
-const portNumber = process.env.PORT || 3000
+const portNumber = process.env.PORT || 4000
 
 app.listen(portNumber,function(){
+
 
 
     console.log(`Listening on port ${portNumber}....`);
