@@ -25,12 +25,13 @@ router.get('/',function(req,res){
 
 router.post('/',function(req,res){
     
-   
+    
     const schema = {
         username : Joi.string().required(),
         password : Joi.string().required()
      }
     
+     console.log(req.query);
     const result = Joi.validate(req.body,schema);
 
     
@@ -52,14 +53,15 @@ router.post('/',function(req,res){
     const token = jwt.sign({userid:userAuthenicated.id},config.jwtPrivateKey,{ expiresIn: config.jwttokenLife })
     const refreshToken = jwt.sign({userid:userAuthenicated.id}, config.refreshTokenSecret, { expiresIn: config.refreshTokenLife})
 
-    res.header('jwt-token',token).header('refresh-token',refreshToken).send({ message : "Login Successfull"});
+   // res.header('jwt-token',token).header('refresh-token',refreshToken).send({ message : "Login Successfull"});
+    res.send({ message : "Login Successfull",'jwttoken':token });
 
 })
 
 
 router.post('/getAllUsers', function(req,res){
-   // tokenValidator(req,res)
-  // console.log(users);
+      tokenValidator(req,res)
+ 
     res.send(users)
    
 })
@@ -105,7 +107,7 @@ function tokenValidator(req,res){
     } 
     catch(ex) {
 
-        res.status(400).send('Invalid Token'); return;
+        res.status(400).send({ message: 'Invalid Token'}); return;
     }
 
 }
